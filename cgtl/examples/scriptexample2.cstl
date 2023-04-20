@@ -1,0 +1,5 @@
+expr::
+open _1 «mapsto»OclFile.newOclFile_Write(OclFile.newOclFile(_1`firstArg))«when» _1`lastArg matches .*[wWaA].*
+«end»
+open _1 «mapsto»OclFile.newOclFile_Read(OclFile.newOclFile(_1`firstArg))
+«end»
