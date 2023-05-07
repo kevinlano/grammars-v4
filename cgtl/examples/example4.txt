@@ -1,0 +1,13 @@
+sequenceFormation::
+_1 «mapsto»_1«when» _1 star_expr «action» _1 Sequence«end»
+
+_1 «mapsto»Sequence{ _1 }«end»
+
+_1 , _* «mapsto»_1->union(_*`recurse)«when» _1 star_expr«action» _1 Sequence«end»
+
+_1 , _* «mapsto»Sequence{_1}->union(_*`recurse)«end»
+
+_1 _2 «mapsto»
+    _2`domainPart->select(_2`variablePart | _2`selectPart)->collect(_2`variablePart | _1)
+      «when» _2 comp_for
+      «end»
