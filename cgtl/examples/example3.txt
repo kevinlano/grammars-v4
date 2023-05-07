@@ -1,0 +1,3 @@
+expr::
+open _1 «mapsto»OclFile.newOclFile_Write(OclFile.newOclFile(_1`firstArg));\n
+«end»
