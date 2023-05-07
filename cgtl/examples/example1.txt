@@ -1,0 +1,51 @@
+/* Script for Python grammar expressions (partial) */
+
+test::
+_1 if _2 else _3 «mapsto»if _2 then _1 else _3 endif«end»
+lambda _1 : _2 «mapsto»lambda _1 in _2«end»
+lambda : _2 «mapsto»lambda $$ : OclAny in _2«end»
+_1 «mapsto»_1«end»
+
+logical_test::
+not _1 «mapsto»not(_1)«end»
+_1 and _2 «mapsto»_1 & _2«end»
+_1 or _2 «mapsto»_1 or _2«end»
+_1 «mapsto»_1«end»
+
+sequenceFormation::
+_1 «mapsto»_1«when» _1 star_expr«end»
+
+_1 «mapsto»Sequence{ _1 }«end»
+
+_1 , _* «mapsto»_1->union(_*`recurse)«when» _1 star_expr«end»
+
+_1 , _* «mapsto»Sequence{_1}->union(_*`recurse)«end»
+
+_1 _2 «mapsto»
+    _2`domainPart->select(_2`variablePart | _2`selectPart)->collect(_2`variablePart | _1)
+      «when» _2 comp_for
+      «end»
+
+comp_for::
+for _1 in _2 «mapsto» «end»
+
+for _1 in _2 _3 «mapsto» «end»
+
+domainPart::
+for _1 in _2 «mapsto»_2«end»
+
+for _1 in _2 _3 «mapsto»_2«end»
+
+
+variablePart::
+for _1 in _2 «mapsto»_1«end»
+
+for _1 in _2 _3 «mapsto»_1«end»
+
+
+selectPart::
+for _1 in _2 «mapsto»true«end»
+
+for _1 in _2 _3 «mapsto»_3`selectPart«end»
+
+
